@@ -1,14 +1,9 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 import java.util.Queue;
-import java.util.Random;
 
 public class Blinky extends Entity {
     Player player;
-
     BufferedImage image = null;
     Tile startTile = TileManager.mapTileNum[18][16];
     Tile currentTile = startTile;
@@ -31,8 +26,9 @@ public class Blinky extends Entity {
 
 
     public void draw(Graphics2D g2) {
+
         g2.drawImage(image, x, y, width, height, null);
-        System.out.println(1);
+
     }
 
     private void chasePlayer() {
@@ -86,33 +82,21 @@ public class Blinky extends Entity {
     }
 
     public void update() {
-       if(meet(currentTile)){
 
-           currentTile.x = startTile.x;
-           currentTile.y = startTile.y;
-       }
+        if (meet(currentTile)) {
 
-//        if (meet(currentTile, player.currentTile)) {
-//
-//
-//            if (!player.run) {
-//                x = 15 * GamePanel.tileSize;
-//                y = 17 * GamePanel.tileSize;
-//                startAgain();
-//            } else player.point += 200;
-//
-//
-//        }
+            x = startTile.x;
+            y = startTile.y;
+        }
 
-        //new Tile(gp.player.x / GamePanel.tileSize, gp.player.currentTile.y / GamePanel.tileSize);
-
+//
         Tile tile1 = new Tile(currentTile.x / GamePanel.tileSize, currentTile.y / GamePanel.tileSize);
 
 
         bfs = Way.bfs(tile, tile1);
 
         if (!bfs.isEmpty()) {
-            if (bfs.size()<3) {
+            if (bfs.size() < 3) {
                 tile = randomTile();
             }
             currentTile1 = bfs.poll();
@@ -135,9 +119,8 @@ public class Blinky extends Entity {
     }
 
     private void updateCurrentTile() {
-        currentTile = TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize];
-    }
-
+        Tile orginalTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
+        currentTile = orginalTile;    }
 
 
 }

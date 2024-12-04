@@ -1,60 +1,29 @@
-//import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
-
 
 public class Entity {
     public int x;
     public int y;
     public int speed;
-    public BufferedImage up, down, left, right, step2, blue, pink, red;
     public String direction;
-    public String lastDirection;
-    // public boolean collision = false;
     public int width = 20;
     public int height = 20;
-    public boolean enable = false;
-    Player player;
+
     GamePanel gp;
-    Tile startTile = TileManager.mapTileNum[18][16];
     public static boolean run = false;
 
-
-//    public ArrayList<String> getDirections(Tile currentTile, String lastDirection) {
-//        ArrayList<String> directions = new ArrayList<>();
-//        if (canMoveToDirection(currentTile, "right")) {
-//            directions.add("right");
-//        }
-//        if (canMoveToDirection(currentTile, "left")) {
-//            directions.add("left");
-//        }
-//        if (canMoveToDirection(currentTile, "up")) {
-//            directions.add("up");
-//        }
-//        if (canMoveToDirection(currentTile, "down")) {
-//            directions.add("down");
-//        }
-//        if (direction.isEmpty()) {
-//            directions.add(lastDirection);
-//        }
-//        return directions;
-//    }
-
+    public static int smallPoint = 0;
+    public static int point = 0;
 
     boolean meet(Tile b) {
 
         if (gp.player.x / GamePanel.tileSize == b.x / GamePanel.tileSize && gp.player.y / GamePanel.tileSize == b.y / GamePanel.tileSize) {
-           gp.player.direction ="up";
-            gp.player.nextDirection ="up";
+            gp.player.direction = "up";
+            gp.player.nextDirection = "up";
             if (run) {
-
+                point += 200;
                 return true;
             } else {
+                GamePanel.life--;
                 startAgain();
 
             }
@@ -83,12 +52,11 @@ public class Entity {
             gp.clyde.y = 16 * GamePanel.tileSize;
             gp.blinky.x = 18 * GamePanel.tileSize;
             gp.blinky.y = 16 * GamePanel.tileSize;
-
+            run = false;
             GamePanel.enabled = false;
-            GamePanel.life--;
 
 
-        }else{
+        } else {
             GamePanel.gameOver = true;
         }
 

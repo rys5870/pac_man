@@ -84,6 +84,7 @@ public class Inky extends Entity {
     }
 
     public void update() {
+
         //   if (Collision.meet(currentTile, player.currentTile,player.run)) {
         if(meet(currentTile)){
 
@@ -125,7 +126,8 @@ public class Inky extends Entity {
     }
 
     private void updateCurrentTile() {
-        currentTile = TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize];
+        Tile orginalTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
+        currentTile = orginalTile;
     }
 
 

@@ -13,9 +13,8 @@ public class Player extends Entity {
     Tile currentTile = TileManager.mapTileNum[1][1];
     int point2 = 240;
     int i = 0;
-    public static int smallPoint = 0;
-    public static int point = 0;
 
+    int counter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         x = GamePanel.tileSize;
@@ -30,48 +29,53 @@ public class Player extends Entity {
     }
 
 
-
-
-
     public void draw(Graphics2D g2) {
 
-            if (i == 10) {
-                i = 0;
-            }
-            if (i > 5) {
-                image = SetImages.getImage(3).image;;
-                i++;
-            } else if(direction.equals("up")){
-                image = SetImages.getImage(5).image;;
-                i++;
-            }else if(direction.equals("down")){
-                image = SetImages.getImage(6).image;;
-                i++;
-            }else if(direction.equals("left")){
-                image = SetImages.getImage(7).image;;
-                i++;
-            }else if(direction.equals("right")){
-                image = SetImages.getImage(8).image;;
-                i++;
-            }
-
-
+        if (i == 10) {
+            i = 0;
+        }
+        if (i > 5) {
+            image = SetImages.getImage(3).image;
+            i++;
+        } else if (direction.equals("up")) {
+            image = SetImages.getImage(5).image;
+            i++;
+        } else if (direction.equals("down")) {
+            image = SetImages.getImage(6).image;
+            i++;
+        } else if (direction.equals("left")) {
+            image = SetImages.getImage(7).image;
+            i++;
+        } else if (direction.equals("right")) {
+            image = SetImages.getImage(8).image;
+            i++;
+        }
 
 
         gp.g2.setColor(Color.white);
-        gp.g2.drawString("points:" + String.valueOf(smallPoint + point), GamePanel.ScreenWidth, 40);
-        gp.g2.drawString("life:" + String.valueOf(GamePanel.life+1), GamePanel.ScreenWidth, 60);
+        Font font = new Font("Impact", Font.TRUETYPE_FONT, 20);
+        gp.g2.setFont(font);
+        gp.g2.drawString("points:" + String.valueOf(smallPoint + point), 60, GamePanel.ScreenHeight + 30);
+        gp.g2.drawString("life:" + String.valueOf(GamePanel.life + 1), 60, GamePanel.ScreenHeight + 50);
         gp.g2.setColor(Color.RED);
-        Font font = new Font("Impact", Font.BOLD, 50);
+
+        font = new Font("Impact", Font.BOLD, 50);
         gp.g2.setFont(font);
 
         g2.drawImage(image, x, y, width, height, null);
-        if(GamePanel.gameOver){
+        if (GamePanel.gameOver) {
 
 
             gp.g2.drawString("Game Over!!!", GamePanel.ScreenWidth / 3, GamePanel.ScreenHeight / 2);
 
         }
+    }
+
+    public void restartGhosts() {
+        gp.pinky.image = SetImages.getImage(9).image;
+        gp.inky.image = SetImages.getImage(11).image;
+        gp.blinky.image = SetImages.getImage(12).image;
+        gp.clyde.image = SetImages.getImage(10).image;
     }
 
     public void update() {
@@ -84,70 +88,39 @@ public class Player extends Entity {
             direction = nextDirection;
             nextDirection = "";
         }
-        if (smallPoint % 2400 == 0) {
+        if (smallPoint % 2400 == 0&&point2!=240) {
+            run = false;
+            GamePanel.life++;
+
+            restartGhosts();
+            startAgain();
             TileManager.loadMap();
             point2 = 240;
+
         }
+
         if (GamePanel.timer == timer2) {
             run = false;
             TileManager.mapTileNum[currentTile.keyX][currentTile.keyY].image = 0;
-            gp.pinky.image =SetImages.getImage(9).image;
-            gp.inky.image =SetImages.getImage(11).image;
-            gp.blinky.image =SetImages.getImage(12).image;
-            gp.clyde.image =SetImages.getImage(10).image;
+            restartGhosts();
         }
-       /* if (meet(currentTile, gp.blinky.currentTile)) {
-            gp.blinky.x = 15 * GamePanel.tileSize;
-            gp.blinky.y = 17 * GamePanel.tileSize;
 
-            if (!run) {
-                gp.pinky.x = 15 * GamePanel.tileSize;
-                gp.pinky.y = 17 * GamePanel.tileSize;
-                startAgain();
-            } else {
-                point += 200;
-            }
-
-         } else if (meet(currentTile, gp.pinky.currentTile)) {
-            gp.pinky.x = 15 * GamePanel.tileSize;
-            gp.pinky.y = 17 * GamePanel.tileSize;
-            if (!run) {
-                gp.blinky.x = 15 * GamePanel.tileSize;
-                gp.blinky.y = 17 * GamePanel.tileSize;
-                startAgain();
-            } else {
-                point += 200;
-            }
-        }
-        if (meet(currentTile, gp.try1.currentTile)){
-            gp.try1.x = (19 * GamePanel.tileSize);
-            gp.try1.y = (15 * GamePanel.tileSize);
-            if (!run) {
-                // gp.try1.x = 15 * GamePanel.tileSize;
-                // gp.try1.y = 17 * GamePanel.tileSize;
-                startAgain();
-            } else {
-
-                point += 200;
-            }
-        }*/
         if (currentTile.image == 2) {
-            TileManager.mapTileNum[currentTile.x/GamePanel.tileSize][currentTile.y/GamePanel.tileSize].image = 0;
-            //gp.g2.drawImage(TileManager.tileImages[0].image, currentTile.x, currentTile.y, GamePanel.tileSize, GamePanel.tileSize, null);
+            TileManager.mapTileNum[currentTile.x / GamePanel.tileSize][currentTile.y / GamePanel.tileSize].image = 0;
             smallPoint += 10;
             point2--;
 
         }
         if (currentTile.image == 4) {
+            point+=50;
             timer2 = GamePanel.timer + 5000;
             run = true;
-
             TileManager.mapTileNum[currentTile.keyX][currentTile.keyY].image = 0;
-            gp.pinky.image =SetImages.getImage(13).image;
-            gp.inky.image =SetImages.getImage(13).image;
-            gp.blinky.image =SetImages.getImage(13).image;
-            gp.clyde.image =SetImages.getImage(13).image;
-           // gp.g2.drawImage(TileManager.tileImages[0].image, currentTile.x, currentTile.y, GamePanel.tileSize, GamePanel.tileSize, null);
+            gp.pinky.image = SetImages.getImage(13).image;
+            gp.inky.image = SetImages.getImage(13).image;
+            gp.blinky.image = SetImages.getImage(13).image;
+            gp.clyde.image = SetImages.getImage(13).image;
+            //  gp.g2.drawImage(SetImages.getImage(0).image, currentTile.x, currentTile.y, GamePanel.tileSize, GamePanel.tileSize, null);
 
         }
 
@@ -219,8 +192,8 @@ public class Player extends Entity {
         }
 
 
-        currentTile = TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize];
-
+        Tile orginalTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
+        currentTile = orginalTile;
 
 
     }

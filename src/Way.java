@@ -15,7 +15,7 @@ public class Way {
     public static Queue<Tile> bfs(Tile start, Tile end) {
         Queue<Tile> q = new LinkedList<>();
         boolean[][] visited = new boolean[TileManager.mapTileNum.length][TileManager.mapTileNum[0].length];
-        System.out.println(start.x+ ","+start.y);
+    //    System.out.println(start.x+ ","+start.y);
         if(start.x>GamePanel.maxScreenCol-1){
             start.x = start.x/GamePanel.tileSize;
         }if(start.y>GamePanel.maxScreenRow-1){

@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Clyde clyde = new Clyde(this, player);
     Thread gameThread;
     public static int life = 2;
+    public static int level = 1;
     public static int timer = 0;
 
     public static boolean enabled = false;
@@ -28,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     GamePanel() {
 
-        this.setPreferredSize(new Dimension(ScreenWidth + 100, ScreenHeight));
+        this.setPreferredSize(new Dimension(ScreenWidth , ScreenHeight+100));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);

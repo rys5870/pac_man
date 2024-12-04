@@ -30,7 +30,7 @@ public class Clyde extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, x, y, width, height, null);
-        System.out.println(1);
+
     }
 
     private void chasePlayer() {
@@ -133,7 +133,8 @@ public class Clyde extends Entity {
     }
 
     private void updateCurrentTile() {
-        currentTile = TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize];
+        Tile orginalTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
+        currentTile = orginalTile;
     }
 
 

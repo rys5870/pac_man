@@ -1,10 +1,6 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
 import java.util.Queue;
-import java.util.Random;
 
 public class Pinky extends Entity {
     Player player;
@@ -32,7 +28,7 @@ public class Pinky extends Entity {
 
     public void draw(Graphics2D g2) {
         g2.drawImage(image, x, y, width, height, null);
-        System.out.println(1);
+
     }
 
     private void chasePlayer() {
@@ -92,12 +88,7 @@ public class Pinky extends Entity {
             y = startTile.y;
         }
 
-
-        //new Tile(gp.player.x / GamePanel.tileSize, gp.player.currentTile.y / GamePanel.tileSize);
-
         Tile tile1 = new Tile(currentTile.x / GamePanel.tileSize, currentTile.y / GamePanel.tileSize);
-
-
         bfs = Way.bfs(tile, tile1);
 
         if (!bfs.isEmpty()) {
@@ -112,7 +103,6 @@ public class Pinky extends Entity {
             tile = randomTile();
         }
 
-
         currentTile1.x *= GamePanel.tileSize;
         currentTile1.y *= GamePanel.tileSize;
         currentTile.x = x;
@@ -120,14 +110,10 @@ public class Pinky extends Entity {
         chasePlayer();
         move();
         updateCurrentTile();
-
     }
 
     private void updateCurrentTile() {
-        currentTile = TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize];
-    }
-
-
-
+        Tile orginalTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
+        currentTile = orginalTile;    }
 }
 
