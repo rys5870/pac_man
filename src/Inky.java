@@ -1,18 +1,13 @@
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
 import java.util.Queue;
 
 public class Inky extends Entity {
     Player player;
 
-    BufferedImage image = null;
+    BufferedImage image;
     Tile startTile = TileManager.mapTileNum[18][16];
     Tile currentTile = startTile;
-    boolean inBox = true;
     Queue<Tile> bfs;
     Tile currentTile1;
     String nextDirection = "";
@@ -67,17 +62,12 @@ public class Inky extends Entity {
                 break;
             case "left":
                 x -= speed;
-//                    if (x <= 0) {
-//                        x = GamePanel.ScreenWidth - GamePanel.tileSize;
-//                    }
+
 
                 break;
             case "right":
 
                 x += speed;
-//                    if (x >= GamePanel.ScreenWidth - GamePanel.tileSize) {
-//                        x = 0;
-//                    }
                 break;
         }
 
@@ -92,7 +82,7 @@ public class Inky extends Entity {
             y = startTile.y;
         }
 
-        Tile tile = new Tile();
+        Tile tile;
         if (run) {
             tile = randomTile2(gp.player.x, gp.player.y);
         } else {
@@ -126,8 +116,7 @@ public class Inky extends Entity {
     }
 
     private void updateCurrentTile() {
-        Tile orginalTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
-        currentTile = orginalTile;
+        currentTile = new Tile(TileManager.mapTileNum[x / GamePanel.tileSize][y / GamePanel.tileSize]);
     }
 
 

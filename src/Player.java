@@ -88,10 +88,10 @@ public class Player extends Entity {
             direction = nextDirection;
             nextDirection = "";
         }
-        if (smallPoint % 2400 == 0&&point2!=240) {
+        if (smallPoint % 2400 == 0 && point2 != 240) {
             run = false;
             GamePanel.life++;
-
+            direction = "";
             restartGhosts();
             startAgain();
             TileManager.loadMap();
@@ -112,7 +112,7 @@ public class Player extends Entity {
 
         }
         if (currentTile.image == 4) {
-            point+=50;
+            point += 50;
             timer2 = GamePanel.timer + 5000;
             run = true;
             TileManager.mapTileNum[currentTile.keyX][currentTile.keyY].image = 0;
