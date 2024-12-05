@@ -1,13 +1,32 @@
+<<<<<<< HEAD
+=======
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+>>>>>>> origin/main
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 
+=======
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> origin/main
 
 public class MyForm extends JFrame {
     private JTextField nameField;
     private JButton submitButton;
+<<<<<<< HEAD
     private JButton submitButton2;
+=======
+>>>>>>> origin/main
     private JLabel label;
 
 
@@ -24,8 +43,11 @@ public class MyForm extends JFrame {
 
         nameField = new JTextField(20);
         submitButton = new JButton("כניסה");
+<<<<<<< HEAD
         submitButton2 = new JButton("נתונים");
         JScrollPane jScrollPane = new JScrollPane();
+=======
+>>>>>>> origin/main
 
         label = new JLabel();
         submitButton = new JButton("Submit");
@@ -33,6 +55,7 @@ public class MyForm extends JFrame {
         submitButton.setForeground(Color.WHITE);
         submitButton.setFocusPainted(false);
         submitButton.setFont(new Font("Arial", Font.BOLD, 14));
+<<<<<<< HEAD
         setLocationRelativeTo(null);
         submitButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -44,6 +67,12 @@ public class MyForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+=======
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+>>>>>>> origin/main
                 if (!nameField.getText().isEmpty()) {
                     name = nameField.getText();
                     System.out.println(name);
@@ -79,10 +108,14 @@ public class MyForm extends JFrame {
         add(new JLabel("Enter your name:"));
         add(nameField);
         add(submitButton);
+<<<<<<< HEAD
         add(submitButton2);
         add(label);
 
 
+=======
+        add(label);
+>>>>>>> origin/main
     }
 
 
