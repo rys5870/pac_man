@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 import java.util.Queue;
 
 public class Inky extends Entity {

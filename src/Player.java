@@ -89,6 +89,8 @@ public class Player extends Entity {
             nextDirection = "";
         }
         if (smallPoint % 2400 == 0 && point2 != 240) {
+            PlayerData newPlayer = new PlayerData(MyForm.name, GamePanel.level, point+smallPoint, GamePanel.life,0);
+            Login.addPleyer(newPlayer);
             run = false;
             GamePanel.life++;
             direction = "";

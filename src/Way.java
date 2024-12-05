@@ -1,5 +1,3 @@
-
-
 import java.util.*;
 
 
@@ -16,7 +14,7 @@ public class Way {
         Queue<Tile> q = new LinkedList<>();
         boolean[][] visited = new boolean[TileManager.mapTileNum.length][TileManager.mapTileNum[0].length];
     //    System.out.println(start.x+ ","+start.y);
-        if(start.x>GamePanel.maxScreenCol-1){
+        if(start.x> GamePanel.maxScreenCol-1){
             start.x = start.x/GamePanel.tileSize;
         }if(start.y>GamePanel.maxScreenRow-1){
             start.y = start.y/GamePanel.tileSize;
